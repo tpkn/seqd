@@ -20,17 +20,17 @@ func main() {
 	runtime.GOMAXPROCS(2)
 	
 	// Short CLI args parser
-	args, print_help, print_version, err := utils.ParseArgs(os.Args)
+	args, err := utils.ParseArgs(os.Args)
 	if err != nil {
 		log.Fatalln(err)
 	}
 	
-	if print_help {
+	if args.Help {
 		fmt.Println(help)
 		os.Exit(0)
 	}
 	
-	if print_version {
+	if args.Version {
 		fmt.Println(version)
 		os.Exit(0)
 	}

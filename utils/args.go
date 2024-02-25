@@ -7,17 +7,17 @@ import (
 )
 
 // ParseArgs returns parsed Args arguments
-func ParseArgs(a []string) (models.Args, bool, bool, error) {
+func ParseArgs(a []string) (models.Args, error) {
 	var args = models.Args{}
 	
 	switch len(a) - 1 {
 	case 1:
 		if a[1] == "--help" {
-			return args, true, false, nil
+			args.Help = true
 		} else if a[1] == "--version" {
-			return args, false, true, nil
+			args.Version = true
 		} else {
-			return args, false, false, errors.New("wrong argument")
+			return args, errors.New("wrong argument")
 		}
 	case 3:
 		args.StartDateTime = a[1]
@@ -35,14 +35,14 @@ func ParseArgs(a []string) (models.Args, bool, bool, error) {
 		case "-s":
 			args.IncreaseBySecond = true
 		default:
-			return args, false, false, errors.New("wrong arguments")
+			return args, errors.New("wrong arguments")
 		}
 		
 		args.StartDateTime = a[2]
 		args.EndDateTime = a[3]
 	default:
-		return args, false, false, errors.New("wrong amount of arguments")
+		return args, errors.New("wrong amount of arguments")
 	}
 	
-	return args, false, false, nil
+	return args, nil
 }

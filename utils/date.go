@@ -13,6 +13,16 @@ func GetDateRangeBounds(start_date, end_date string) (time.Time, time.Time, stri
 		return time.Time{}, time.Time{}, "", err
 	}
 	
+	// End of month date
+	if end_date == "eom" {
+		end_date = endOfMonth(d1).Format(start_format)
+	}
+	
+	// End of year date
+	if end_date == "eoy" {
+		end_date = endOfYear(d1).Format(start_format)
+	}
+	
 	d2, end_format, err := parseDate(end_date)
 	if err != nil {
 		return time.Time{}, time.Time{}, "", err
@@ -41,4 +51,14 @@ func parseDate(d string) (time.Time, string, error) {
 		}
 	}
 	return date, format, nil
+}
+
+// endOfMonth returns last day of the month ('2023-03-06' => '2023-03-31')
+func endOfMonth(date time.Time) time.Time {
+	return date.AddDate(0, 1, -date.Day())
+}
+
+// endOfYear returns last day of the year ('2023-03-06' => '2023-12-31')
+func endOfYear(date time.Time) time.Time {
+	return time.Date(date.Year(), 12, 31, date.Hour(), date.Minute(), date.Second(), date.Nanosecond(), date.Location())
 }

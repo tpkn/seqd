@@ -2,7 +2,7 @@
 
 # ---------------------------
 # cd <installation_dir>
-# curl --silent -L https://github.com/tpkn/seqd/blob/main/install.sh 2> /dev/null | sh
+# curl --silent -L https://raw.githubusercontent.com/tpkn/seqd/main/install.sh 2> /dev/null | bash
 # ---------------------------
 
 release_url="https://github.com/tpkn/seqd/releases/latest/download/seqd"

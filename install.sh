@@ -2,7 +2,7 @@
 
 # ---------------------------
 # cd <installation_dir>
-# curl --silent -L https://raw.githubusercontent.com/tpkn/seqd/main/install.sh 2> /dev/null | bash
+# sudo curl --silent -L https://raw.githubusercontent.com/tpkn/seqd/main/install.sh 2> /dev/null | bash
 # ---------------------------
 
 release_url="https://github.com/tpkn/seqd/releases/latest/download/seqd"
@@ -21,12 +21,12 @@ fi
 
 echo "[✓] Downloaded: $binary_path"
 
-if ! chmod -R 0750 "$binary_path" &> /dev/null; then
+if ! chmod -R 0744 "$binary_path" &> /dev/null; then
 	echo "[x] Can't change permissions to '$binary_path'"
 	exit 1
 fi
 
-echo "[✓] Permissions changed to 'rwxr-x---'"
+echo "[✓] Permissions changed to 744"
 
 while true; do
 	read -p "Create alias '$binary_name' for binary? [y/n] " q

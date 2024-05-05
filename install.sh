@@ -1,47 +1,33 @@
 #!/bin/bash
-
 # ---------------------------
-# cd <installation_dir>
-# sudo curl --silent -L https://raw.githubusercontent.com/tpkn/seqd/main/install.sh 2> /dev/null | bash
+# curl --silent -L https://raw.githubusercontent.com/tpkn/seqd/main/install.sh 2> /dev/null | sudo bash
 # ---------------------------
-
 release_url="https://github.com/tpkn/seqd/releases/latest/download/seqd"
 
 binary_name=$(cut -d '/' -f 9 <<< "$release_url")
-binary_path="$PWD/$binary_name"
-usr_bin_path="/usr/bin"
+binary_path="/usr/local/bin/$binary_name"
+binary_path_alt="/usr/bin/$binary_name"
 
-echo "Installing: $release_url ..."
+sudo -v &> /dev/null && echo "Downloading: $release_url ..." || echo "[x] You are not a sudo user"
 
-status=$(curl --write-out %{http_code} --silent --fail -LO "$release_url")
+# Check if there is a '/usr/local/bin' in $PATH
+if ! grep -q '/usr/local/bin/' <<< "$PATH"; then
+	binary_path=$binary_path_alt
+	echo "[!] There is no '/usr/local/bin' path in $PATH, installing into '/usr/bin'"
+fi
+
+status=$(curl --fail -sLo "$binary_path" "$release_url" --write-out %{http_code})
 if (( $status != 200 )); then
 	echo "[x] Can't download binary: $release_url"
 	exit 1
 fi
 
-echo "[✓] Downloaded: $binary_path"
+echo "[✓] Installed: $binary_path"
 
-if ! chmod -R 0744 "$binary_path" &> /dev/null; then
-	echo "[x] Can't change permissions to '$binary_path'"
+if ! chmod -R 0755 "$binary_path" &> /dev/null; then
+	echo "[x] Can't change permissions for '$binary_path'"
 	exit 1
 fi
 
-echo "[✓] Permissions changed to 744"
-
-while true; do
-	read -p "Create alias '$binary_name' for binary? [y/n] " q
-	case $q in
-	[Yy]* )
-			if ! command -v "$binary_name" &> /dev/null; then
-				if ! ln -s "$binary_path" "$usr_bin_path/$binary_name" &> /dev/null; then
-					echo "[x] Can't create alias '$binary_name' for '$binary_path'"
-				fi
-			else
-				echo "[-] Alias '$binary_name' already exists"
-			fi
-		break;;
-	* ) break ;;
-	esac
-done
-
+echo "[✓] Permissions changed to 755"
 echo "[✓] Done: v$($binary_path --version)"

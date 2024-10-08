@@ -2,7 +2,7 @@
    <img width="200" src="icon.png" alt="" align="center">
 </p>
 <p align="center">
-   Just like Linux `seq`, but for date.
+   Just like <code>seq</code>, but for date.
 </p>
 
 

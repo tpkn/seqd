@@ -3,7 +3,7 @@ package utils
 import (
 	"reflect"
 	"testing"
-	
+
 	"seqd/models"
 )
 

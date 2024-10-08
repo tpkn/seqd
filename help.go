@@ -5,7 +5,7 @@ const Help = `seqd (v%v) | tpkn.me
 Just like Linux 'seq', but for date.
 
 Usage:
-  seqd [-Y | -M | -D | -h | -m | -s] "<start_date>" "<end_date>"
+  seqd [-Y | -M | -D | -h | -m | -s] <start_date> <end_date>
 
 Options:
   <end_date>   Can also be a "eom" (end of month) or "eoy" (end of year)
@@ -18,16 +18,14 @@ Options:
   --help       Help
   --version    Version
 
-Example of usage in bash:
-  while read date_time; do
-     echo $date_time
-  done <<< "$(seqd -h "2024-02-02 12:00:00" "2024-02-02 13:00:00")"
-  
-  # or
-  
-  IFS=$'\n'
-  for date_time in $(seqd -h "2024-02-02 12:00:00" "2024-03-01 23:00:00"); do
-     echo $date_time
-  done
+Examples:
+  -- Date with time
+  while read day_time; do
+     echo $day_time
+  done <<< "$(seqd -h "2024-02-02 12:00:00" "2024-03-01 13:00:00")"
 
+  -- Just date
+  for day in $(seqd -h "2024-02-02" "2024-03-01"); do
+     echo $day
+  done
 `

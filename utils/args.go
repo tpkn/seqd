@@ -2,14 +2,14 @@ package utils
 
 import (
 	"errors"
-	
+
 	"seqd/models"
 )
 
 // ParseArgs returns parsed Args arguments
 func ParseArgs(a []string) (models.Args, error) {
 	var args = models.Args{}
-	
+
 	switch len(a) - 1 {
 	case 1:
 		if a[1] == "--help" {
@@ -37,12 +37,12 @@ func ParseArgs(a []string) (models.Args, error) {
 		default:
 			return args, errors.New("wrong arguments")
 		}
-		
+
 		args.StartDateTime = a[2]
 		args.EndDateTime = a[3]
 	default:
 		return args, errors.New("wrong amount of arguments")
 	}
-	
+
 	return args, nil
 }

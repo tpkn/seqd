@@ -1,14 +1,15 @@
-<p align="center" style="margin-bottom: 0px !important;">
+<p align="center">
    <img width="200" src="icon.png" alt="" align="center">
 </p>
-<p align="center" style="margin-bottom: 0px !important;">
+<p align="center">
    Just like Linux `seq`, but for date.
 </p>
+
 
 ## Usage
 
 ```
-seqd [-Y | -M | -D | -h | -m | -s] [-r] "<start_date>" "<end_date>"
+seqd [-Y | -M | -D | -h | -m | -s] <start_date> <end_date>
 ```
 
 ## Options
@@ -21,7 +22,6 @@ seqd [-Y | -M | -D | -h | -m | -s] [-r] "<start_date>" "<end_date>"
 -h           Step by hours
 -m           Step by minutes
 -s           Step by seconds
--r           Dates in reverse order
 --help       Help
 --version    Version
 ```

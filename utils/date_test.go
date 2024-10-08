@@ -61,7 +61,7 @@ func Test_GetDateRangeBounds(t *testing.T) {
 		{name: "End of Month", args: args{start_date: "2024-02-01 05:13:59", end_date: "eom"}, want: "2024-02-01 05:13:59", want1: "2024-02-29 05:13:59", want2: time.DateTime, wantErr: false},
 		{name: "End of Year", args: args{start_date: "2024-01-01 05:13:59", end_date: "eoy"}, want: "2024-01-01 05:13:59", want1: "2024-12-31 05:13:59", want2: time.DateTime, wantErr: false},
 	}
-	
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, got1, got2, err := GetDateRangeBounds(tt.args.start_date, tt.args.end_date)
@@ -81,7 +81,7 @@ func Test_GetDateRangeBounds(t *testing.T) {
 				t.Errorf("GetDateRangeBounds() got2 = %v, want %v", got2, tt.want2)
 				return
 			}
-			
+
 			// fmt.Println("OK:", got.Format(got2), "->", got1.Format(got2))
 		})
 	}

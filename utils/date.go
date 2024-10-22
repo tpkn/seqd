@@ -12,30 +12,30 @@ func GetDateRangeBounds(start_date, end_date string) (time.Time, time.Time, stri
 	if err != nil {
 		return time.Time{}, time.Time{}, "", err
 	}
-
+	
 	// End of month date
 	if end_date == "eom" {
 		end_date = endOfMonth(d1).Format(start_format)
 	}
-
+	
 	// End of year date
 	if end_date == "eoy" {
 		end_date = endOfYear(d1).Format(start_format)
 	}
-
+	
 	d2, end_format, err := parseDate(end_date)
 	if err != nil {
 		return time.Time{}, time.Time{}, "", err
 	}
-
+	
 	if start_format != end_format {
-		return time.Time{}, time.Time{}, "", errors.New(fmt.Sprintf("start date and end date has different format: '%v' != '%v'", start_format, end_format))
+		return time.Time{}, time.Time{}, "", errors.New(fmt.Sprintf("start date and end date has different format (%v != %v)", start_format, end_format))
 	}
-
+	
 	if d1.After(d2) {
-		return time.Time{}, time.Time{}, "", errors.New(fmt.Sprintf("start date is greater than end date: '%v' > '%v'", d1.Format(start_format), d2.Format(start_format)))
+		return time.Time{}, time.Time{}, "", errors.New(fmt.Sprintf("start date is greater than end date (%v > %v)", d1.Format(start_format), d2.Format(start_format)))
 	}
-
+	
 	return d1, d2, start_format, nil
 }
 
@@ -47,7 +47,7 @@ func parseDate(d string) (time.Time, string, error) {
 		// Now just as date
 		format = time.DateOnly
 		if date, err = time.Parse(format, d); err != nil {
-			return time.Time{}, "", errors.New(fmt.Sprintf("can't parse date '%v' beacause it has a wrong format: should be 'YYYY-MM-DD' or 'YYYY-MM-DD hh:mm:ss')", d))
+			return time.Time{}, "", errors.New(fmt.Sprintf("can't parse date '%v' beacause it has a wrong format (should be 'YYYY-MM-DD' or 'YYYY-MM-DD hh:mm:ss')", d))
 		}
 	}
 	return date, format, nil

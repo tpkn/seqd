@@ -1,0 +1,6 @@
+/_
+/build
+.idea
+.gitignore
+*.bat
+*.cmd

@@ -1,5 +1,6 @@
 /_
 /build
+.git
 .idea
 .gitignore
 *.bat

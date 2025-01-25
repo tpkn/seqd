@@ -1,4 +1,4 @@
-package core
+package seqd
 
 import (
 	"errors"
@@ -47,7 +47,7 @@ func ParseArgs(a []string) (Args, error) {
 		case "-s":
 			args.IncreaseBySecond = true
 		default:
-			return args, errors.New("wrong arguments")
+			return args, errors.New("unknown flag " + a[1])
 		}
 		
 		args.StartDateTime = a[2]
@@ -58,7 +58,7 @@ func ParseArgs(a []string) (Args, error) {
 			case "-r":
 				args.ReversedOrder = true
 			default:
-				return args, errors.New("wrong argument")
+				return args, errors.New("unknown flag " + a[4])
 			}
 		}
 	default:

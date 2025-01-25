@@ -6,7 +6,7 @@ import (
 	"os"
 	"runtime"
 	
-	"seqd/core"
+	"seqd/seqd"
 )
 
 var env = "development"
@@ -15,11 +15,10 @@ var help = fmt.Sprintf(Help, version)
 
 func main() {
 	log.SetFlags(0)
-	log.SetPrefix("[seqd] ")
+	log.SetPrefix("seqd: ")
 	runtime.GOMAXPROCS(1)
 	
-	// Short CLI args parser
-	args, err := core.ParseArgs(os.Args)
+	args, err := seqd.ParseArgs(os.Args)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -34,7 +33,7 @@ func main() {
 		os.Exit(0)
 	}
 	
-	err = core.PrintDateRange(os.Stdout, &args)
+	err = seqd.GenerateDateRange(seqd.StdoutWriter{}, &args)
 	if err != nil {
 		log.Fatalln(err)
 	}

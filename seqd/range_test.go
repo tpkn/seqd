@@ -87,7 +87,7 @@ func Test_PrintDateRange(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, []string{"2025-01-01 23:59:59", "2025-01-02 00:00:00", "2025-01-02 00:00:01", "2025-01-02 00:00:02"}, got.result)
 	
-	// eom/oey ----------------------
+	// eom/eoy ----------------------
 	
 	got = mockOutputWriter{result: []string{}}
 	err = GenerateDateRange(&got, &Args{StartDateTime: "2025-01-01", EndDateTime: "eom", IncreaseByYear: true})
@@ -134,7 +134,7 @@ func Test_PrintDateRange(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, []string{"2025-12-31 23:57:00", "2025-12-31 23:58:00", "2025-12-31 23:59:00"}, got.result)
 	
-	// reversed ---------------------
+	// Reversed ---------------------
 	
 	got = mockOutputWriter{result: []string{}}
 	err = GenerateDateRange(&got, &Args{StartDateTime: "2025-01-01", EndDateTime: "2025-01-01", IncreaseByDay: true, ReversedOrder: true})

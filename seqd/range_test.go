@@ -20,27 +20,21 @@ func Test_PrintDateRange(t *testing.T) {
 	err := GenerateDateRange(&got, &Args{StartDateTime: "", EndDateTime: ""})
 	require.ErrorContains(t, err, "can't parse date")
 	
-	got = mockOutputWriter{}
 	err = GenerateDateRange(&got, &Args{StartDateTime: "2025-01-01", EndDateTime: "2025-01-03", IncreaseBySecond: true})
 	require.ErrorContains(t, err, "flags '-h', '-m' and '-s' can only be used with")
 	
-	got = mockOutputWriter{}
 	err = GenerateDateRange(&got, &Args{StartDateTime: "2025-01-03", EndDateTime: "2025-01-01", IncreaseByDay: true})
 	require.ErrorContains(t, err, "start date is greater than end date")
 	
-	got = mockOutputWriter{}
 	err = GenerateDateRange(&got, &Args{StartDateTime: "2025-01-03 23:59:59", EndDateTime: "2025-01-01", IncreaseByDay: true})
 	require.ErrorContains(t, err, "start date and end date has different format")
 	
-	got = mockOutputWriter{}
 	err = GenerateDateRange(&got, &Args{StartDateTime: "2025-01-03", EndDateTime: "2025-01-01", IncreaseByDay: true, ReversedOrder: true})
 	require.ErrorContains(t, err, "start date is greater than end date")
 	
-	got = mockOutputWriter{}
 	err = GenerateDateRange(&got, &Args{StartDateTime: "eom", EndDateTime: "2025-01-01", IncreaseByDay: true})
 	require.ErrorContains(t, err, "'eom' macros can only be used in end date")
 	
-	got = mockOutputWriter{}
 	err = GenerateDateRange(&got, &Args{StartDateTime: "eoy", EndDateTime: "2025-01-01", IncreaseByDay: true})
 	require.ErrorContains(t, err, "'eoy' macros can only be used in end date")
 	

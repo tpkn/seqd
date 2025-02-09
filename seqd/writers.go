@@ -9,9 +9,5 @@ type StdoutWriter struct{}
 
 // WriteString writes new-line separated results to STDOUT
 func (o StdoutWriter) WriteString(s string) (int, error) {
-	_, err := os.Stdout.WriteString(s + "\n")
-	if err != nil {
-		return 0, err
-	}
-	return 0, nil
+	return os.Stdout.WriteString(s + "\n")
 }

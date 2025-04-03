@@ -30,46 +30,46 @@ func parseDate(d string) (time.Time, string, error) {
 // getDateRangeBounds returns date range start and end points
 func getDateRangeBounds(start_date, end_date string) (DateRange, error) {
 	result := DateRange{}
-	
+
 	if strings.Contains(start_date, "eom") {
 		return result, errors.New("'eom' macros can only be used in end date")
 	}
 	if strings.Contains(start_date, "eoy") {
 		return result, errors.New("'eoy' macros can only be used in end date")
 	}
-	
+
 	d1, start_format, err := parseDate(start_date)
 	if err != nil {
 		return result, err
 	}
-	
+
 	// End of month date
 	if end_date == "eom" {
 		end_date = getEndOfMonthDate(d1).Format(start_format)
 	}
-	
+
 	// End of year date
 	if end_date == "eoy" {
 		end_date = getAndOfYearDate(d1).Format(start_format)
 	}
-	
+
 	d2, end_format, err := parseDate(end_date)
 	if err != nil {
 		return result, err
 	}
-	
+
 	if start_format != end_format {
 		return result, errors.New(fmt.Sprintf("start date and end date has different format (%v != %v)", start_format, end_format))
 	}
-	
+
 	if d1.After(d2) {
 		return result, errors.New(fmt.Sprintf("start date is greater than end date (%v > %v)", d1.Format(start_format), d2.Format(start_format)))
 	}
-	
+
 	result.Start = d1
 	result.End = d2
 	result.Format = start_format
-	
+
 	return result, nil
 }
 

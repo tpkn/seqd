@@ -16,11 +16,11 @@ func GenerateDateRange(output OutputWriter, args *Args) error {
 	if err != nil {
 		return err
 	}
-	
+
 	if (args.IncreaseByHour || args.IncreaseByMinute || args.IncreaseBySecond) && dateRange.Format == time.DateOnly {
 		return errors.New("flags '-h', '-m' and '-s' can only be used with 'YYYY-MM-DD hh:mm:ss' format of input date")
 	}
-	
+
 	// If start date and end dates are equal, nothing needs to be done
 	if dateRange.Start.Equal(dateRange.End) {
 		_, err = output.WriteString(dateRange.Start.Format(dateRange.Format))
@@ -29,13 +29,13 @@ func GenerateDateRange(output OutputWriter, args *Args) error {
 		}
 		return nil
 	}
-	
+
 	if !args.ReversedOrder {
 		_, err = output.WriteString(dateRange.Start.Format(dateRange.Format))
 		if err != nil {
 			return err
 		}
-		
+
 		for !dateRange.Start.Equal(dateRange.End) {
 			if args.IncreaseByYear {
 				dateRange.Start = dateRange.Start.AddDate(1, 0, 0)
@@ -53,7 +53,7 @@ func GenerateDateRange(output OutputWriter, args *Args) error {
 			if dateRange.Start.After(dateRange.End) {
 				break
 			}
-			
+
 			_, err = output.WriteString(dateRange.Start.Format(dateRange.Format))
 			if err != nil {
 				return err
@@ -64,7 +64,7 @@ func GenerateDateRange(output OutputWriter, args *Args) error {
 		if err != nil {
 			return err
 		}
-		
+
 		for !dateRange.End.Equal(dateRange.Start) {
 			if args.IncreaseByYear {
 				dateRange.End = dateRange.End.AddDate(-1, 0, 0)
@@ -82,13 +82,13 @@ func GenerateDateRange(output OutputWriter, args *Args) error {
 			if dateRange.End.Before(dateRange.Start) {
 				break
 			}
-			
+
 			_, err = output.WriteString(dateRange.End.Format(dateRange.Format))
 			if err != nil {
 				return err
 			}
 		}
 	}
-	
+
 	return nil
 }

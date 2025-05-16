@@ -31,8 +31,8 @@ Examples:
 
   -- By hours
   while read date_time; do
-     day=$(date -d "$date_time" '+%F')
-     hour=$(date -d "$date_time" '+%H')
+     day=$(date -d "$date_time" '+%%F')
+     hour=$(date -d "$date_time" '+%%H')
      echo "$day -> $hour"
   done <<< "$(seqd -h "2024-02-02 12:00:00" "2024-03-01 13:00:00")"
 `

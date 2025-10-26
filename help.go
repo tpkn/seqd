@@ -15,16 +15,16 @@ const Help = `                                     /▒▒
 Just like 'seq', but for date.
 
 Usage:
-  seqd [-Y | -M | -D | -h | -m | -s] <start_date> <end_date>
+  seqd [ -options ] <start_date> <end_date>
 
 Options:
   <end_date>   Can also be a "eom" (end of month) or "eoy" (end of year)
-  -Y           Step by years   (-Yr for reversed order)
-  -M           Step by months  (-Mr for reversed order)
-  -D           Step by days    (-Dr for reversed order)
-  -h           Step by hours   (-hr for reversed order)
-  -m           Step by minutes (-mr for reversed order)
-  -s           Step by seconds (-sr for reversed order)
+  -Y           Step by years   (reversed order: -Yr)
+  -M           Step by months  (reversed order: -Mr)
+  -D           Step by days    (reversed order: -Dr)
+  -h           Step by hours   (reversed order: -hr)
+  -m           Step by minutes (reversed order: -mr)
+  -s           Step by seconds (reversed order: -sr)
   --help       Help
   --version    Version
 

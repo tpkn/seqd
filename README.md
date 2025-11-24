@@ -1,5 +1,5 @@
 <p align="center">
-   <img width="250" src="icon.png" alt="" align="center">
+   <img width="350" src="icon.png" alt="" align="center">
 </p>
 <p align="center">
    Just like <code>seq</code>, but for date.

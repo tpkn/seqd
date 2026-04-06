@@ -5,6 +5,12 @@
    Just like <code>seq</code>, but for date.
 </p>
 
+## Install
+
+```shell
+curl --silent -L https://raw.githubusercontent.com/tpkn/seqd/main/install.sh | sudo bash
+```
+
 ## Usage
 
 ```

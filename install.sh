@@ -13,7 +13,8 @@ sudo -v &> /dev/null && echo "Downloading: $release_url ..." || echo "[x] You ar
 # Check if there is a '/usr/local/bin' in $PATH
 if ! grep -q '/usr/local/bin/' <<< "$PATH"; then
 	binary_path=$binary_path_alt
-	echo "[!] There is no '/usr/local/bin' path in $PATH, installing into '/usr/bin'"
+	echo "[-] There is no '/usr/local/bin' path in '$PATH'"
+	echo "[✓] Installing into '/usr/bin'"
 fi
 
 status=$(curl --fail -sLo "$binary_path" "$release_url" --write-out %{http_code})

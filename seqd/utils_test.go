@@ -100,13 +100,13 @@ func Test_getEndOfMonthDate(t *testing.T) {
 	require.Equal(t, "2025-02-28 23:59:59", got)
 }
 
-func Test_getAndOfYearDate(t *testing.T) {
+func Test_getEndOfYearDate(t *testing.T) {
 	test_date, _ := time.Parse(time.DateTime, "2025-01-01 12:34:56")
 
-	got := getAndOfYearDate(test_date).Format(time.DateOnly)
+	got := getEndOfYearDate(test_date).Format(time.DateOnly)
 	require.Equal(t, "2025-12-31", got)
 
-	got = getAndOfYearDate(test_date).Format(time.DateTime)
+	got = getEndOfYearDate(test_date).Format(time.DateTime)
 	require.Equal(t, "2025-12-31 23:59:59", got)
 }
 
